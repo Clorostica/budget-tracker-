@@ -133,7 +133,79 @@ input:focus, select:focus {
         </div>
 
     </div>
+    <script>
+        <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log('DOM loaded'); // Asegúrate de que este mensaje aparezca en la consola
 
+    const addExpenseButton = document.getElementById("addExpenseButton");
+    const addGainButton = document.getElementById("addGainButton");
+    const expenseList = document.getElementById("expenseList");
+
+    // Para las pruebas
+    console.log(addExpenseButton, addGainButton, expenseList); 
+
+    const totalAmountDisplay = document.getElementById("totalAmount");
+    const totalIncomeDisplay = document.getElementById("totalIncome");
+    const netBalanceDisplay = document.getElementById("netBalance");
+
+    let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    let incomes = JSON.parse(localStorage.getItem("incomes")) || [];
+    let totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0);
+    let totalIncome = incomes.reduce((total, income) => total + income.amount, 0);
+    let netBalance = totalIncome - totalExpense;
+
+    totalAmountDisplay.textContent = totalExpense.toFixed(2);
+    totalIncomeDisplay.textContent = totalIncome.toFixed(2);
+    netBalanceDisplay.textContent = netBalance.toFixed(2);
+
+    function renderExpensesAndIncomes() {
+      expenseList.innerHTML = "";
+      expenses.forEach((expense) => {
+        const expenseDiv = document.createElement("div");
+        expenseDiv.classList.add("expense-list-item");
+        expenseDiv.innerHTML = `
+          <p>${expense.name} - $${expense.amount}</p>
+          <button class="remove-button" data-id="${expense.id}">Remove</button>
+        `;
+        expenseList.appendChild(expenseDiv);
+      });
+
+      incomes.forEach((income) => {
+        const incomeDiv = document.createElement("div");
+        incomeDiv.classList.add("expense-list-item");
+        incomeDiv.innerHTML = `
+          <p>${income.name} - $${income.amount}</p>
+          <button class="remove-button" data-id="${income.id}">Remove</button>
+        `;
+        expenseList.appendChild(incomeDiv);
+      });
+
+      // Aquí agregamos los eventos para eliminar
+      document.querySelectorAll(".remove-button").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const id = parseInt(e.target.getAttribute("data-id"));
+          console.log('ID to remove:', id);
+          // Implementar eliminación aquí
+        });
+      });
+    }
+
+    addExpenseButton.addEventListener("click", () => {
+      console.log('Add Expense clicked');
+      // Agregar lógica para expense
+    });
+
+    addGainButton.addEventListener("click", () => {
+      console.log('Add Income clicked');
+      // Agregar lógica para gain
+    });
+
+    renderExpensesAndIncomes();
+  });
+</script>
+
+    </script>
     <script src="https://clorostica.github.io/app.js"></script> 
 </body>
 </html>
