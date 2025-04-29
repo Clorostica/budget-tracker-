@@ -1,4 +1,4 @@
-# budget-tracker-
+# Budget Tracker
 🧾 Project Description – Budget Tracker
 Budget Tracker is a lightweight and responsive web application designed to help users manage their personal finances with ease. It allows you to add and categorize both income and expenses, providing a clear overview of your total balance and spending habits.
 
